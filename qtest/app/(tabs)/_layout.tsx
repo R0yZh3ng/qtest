@@ -10,8 +10,8 @@ export default function TabLayout() {
       <Tabs.Screen 
         name = "index" 
         options={{
-          headerTitle: "Home", 
           headerShown: false, 
+          tabBarLabel: "Home",
           tabBarIcon: ({focused, color}) => (
             <Ionicons 
               name={focused ? "home-sharp" : "home-outline"} 
@@ -25,8 +25,15 @@ export default function TabLayout() {
       <Tabs.Screen 
         name = "zetamac" 
         options={{
-          headerTitle: "Arithmetic Zetamac", 
           headerShown: false,
+          tabBarLabel: "Zetamac",
+          tabBarIcon: ({focused, color}) => (
+            <Ionicons
+              name={focused ? "speedometer-sharp" : "speedometer-outline"}
+              color={color}
+              size={30}
+            />
+          )
         }} 
       />
 

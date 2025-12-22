@@ -1,9 +1,49 @@
-import { Text, View, StyleSheet} from "react-native";
+import { Text, View, StyleSheet, Button, TextInput } from "react-native";
+import React, { useState, useEffect } from "react";
 
 export default function Zetamac() {
+  const [score, setScore] = useState(0);
+
+  const [randomInt, generateRandom] = useState(Math.floor(Math.random() * 999));
+  const [randomInt2, generateRandom2] = useState(Math.floor(Math.random() * 999));
+  const [operation, generateOperation] = useState<"add" | "subtract" | "multiply" | "divide">("add");
+  
+  const answer = randomInt + randomInt2;
+
+  const [input, setInput] = useState("");
+
+  function answerInput(text) {
+    setInput(text);
+
+    const value = Number(text);
+
+    if (value === answer) {
+       generateRandom(Math.floor(Math.random() * 999));
+       generateRandom2(Math.floor(Math.random() * 999));
+       setInput("");
+
+    }
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>this is where the zetamac page will be</Text>
+      <Text style={styles.text}>
+        this is where the zetamac page will be {score} {randomInt} {randomInt2} {answer} {operation}
+      </Text>
+      <Button
+        onPress={() => {
+          console.log('You tapped the button!');
+          generateRandom(Math.floor(Math.random() * 999));
+          generateRandom2(Math.floor(Math.random() * 999));
+         }}
+       title="Press Me"
+      />
+      <TextInput 
+        value={input}
+        onChangeText={answerInput}
+        
+        style={styles.input}
+      />
     </View>
   );
 }
@@ -18,6 +58,16 @@ const styles = StyleSheet.create({
 
   text: {
     color: "#ffffff",
+  },
+
+  input: {
+    height: 40,
+    borderColor: '#cccccc',
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingLeft: 10,
+    backgroundColor: '#ffffff',
+    color: '#000000',
   },
 
 });
