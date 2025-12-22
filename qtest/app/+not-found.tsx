@@ -4,7 +4,10 @@ import { Link } from "expo-router";
 export default function Index() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>This is the start to a personal use only quant practice tool using react native</Text>
+      <Text style={styles.text}>This page does not exist, head back to Home</Text>
+      <Link href={"/"} style={styles.button}>
+        Home Page
+      </Link>
     </View>
   );
 }

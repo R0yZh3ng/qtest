@@ -1,35 +1,36 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { Tabs } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
-      <Tabs.Screen
-        name="index"
+    <Tabs screenOptions={{
+      tabBarActiveTintColor: "#ffd33d",
+    }}
+    >
+      <Tabs.Screen 
+        name = "index" 
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          headerTitle: "Home", 
+          headerShown: false, 
+          tabBarIcon: ({focused, color}) => (
+            <Ionicons 
+              name={focused ? "home-sharp" : "home-outline"} 
+              color={color} 
+              size={30} 
+            />
+          ),
         }}
       />
-      <Tabs.Screen
-        name="explore"
+
+      <Tabs.Screen 
+        name = "zetamac" 
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
+          headerTitle: "Arithmetic Zetamac", 
+          headerShown: false,
+        }} 
       />
+
+      <Tabs.Screen name="+not-found" options={{}} />
     </Tabs>
   );
 }
