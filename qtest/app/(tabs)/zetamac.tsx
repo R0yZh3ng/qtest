@@ -6,9 +6,23 @@ export default function Zetamac() {
 
   const [randomInt, generateRandom] = useState(Math.floor(Math.random() * 999));
   const [randomInt2, generateRandom2] = useState(Math.floor(Math.random() * 999));
-  const [operation, generateOperation] = useState<"add" | "subtract" | "multiply" | "divide">("add");
+  const [operation, generateOperation] = useState(Math.floor(Math.random() * 3));
+
+  let answer: number;
   
-  const answer = randomInt + randomInt2;
+  switch (operation) {
+      case 0:
+          answer = randomInt + randomInt2; // add
+          break;
+      case 1:
+          answer = randomInt - randomInt2; // subtract
+          break;
+      case 2:
+          answer = randomInt * randomInt2; // multiply
+          break;
+      case 3:
+          answer = randomInt / randomInt2; //divide
+  }
 
   const [input, setInput] = useState("");
 
@@ -20,6 +34,7 @@ export default function Zetamac() {
     if (value === answer) {
        generateRandom(Math.floor(Math.random() * 999));
        generateRandom2(Math.floor(Math.random() * 999));
+       generateOperation(Math.floor(Math.random()* 3));
        setInput("");
 
     }
@@ -35,6 +50,7 @@ export default function Zetamac() {
           console.log('You tapped the button!');
           generateRandom(Math.floor(Math.random() * 999));
           generateRandom2(Math.floor(Math.random() * 999));
+          generateOperation();
          }}
        title="Press Me"
       />
