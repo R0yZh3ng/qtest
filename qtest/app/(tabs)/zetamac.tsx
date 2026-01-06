@@ -1,5 +1,6 @@
 import { Text, View, StyleSheet, Button, TextInput } from "react-native";
 import React, { useState, useEffect, useMemo } from "react";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function Zetamac() {
   const [score, setScore] = useState(0);
@@ -63,11 +64,17 @@ export default function Zetamac() {
     <View style={styles.container}>
       <Text style={styles.scoreText}>Score: {score}</Text>
     
-      <View style={styles.problemBox}>
-        <Text style={styles.problemText}>
-          {randomInt} {operation} {randomInt2}
-        </Text>
-      </View>
+      
+    <View style={styles.problemBox}>
+      <Text style={styles.problemText}>{randomInt}</Text>
+    
+      {operation === 0 && <Text style={styles.problemText}>+</Text>}
+      {operation === 1 && <Text style={styles.problemText}>−</Text>}
+      {operation === 2 && <Text style={styles.problemText}>×</Text>}
+      {operation === 3 && <Text style={styles.problemText}>÷</Text>}
+    
+      <Text style={styles.problemText}>{randomInt2}</Text>
+    </View>
     
       <TextInput
         value={input}
@@ -129,6 +136,8 @@ const styles = StyleSheet.create({
     marginBottom: 24,
     minWidth: "80%",
     alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "center",
   },
 
   problemText: {
