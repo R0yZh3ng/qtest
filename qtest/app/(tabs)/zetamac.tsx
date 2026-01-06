@@ -1,28 +1,42 @@
 import { Text, View, StyleSheet, Button, TextInput } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 
 export default function Zetamac() {
   const [score, setScore] = useState(0);
 
-  const [randomInt, generateRandom] = useState(Math.floor(Math.random() * 999));
-  const [randomInt2, generateRandom2] = useState(Math.floor(Math.random() * 999));
-  const [operation, generateOperation] = useState(Math.floor(Math.random() * 3));
+  const [level, setDifficulty] = useState(0);
 
-  let answer: number;
-  
-  switch (operation) {
+  const max = useMemo(() => {
+    switch (level) {
       case 0:
-          answer = randomInt + randomInt2; // add
-          break;
+          return 21;
       case 1:
-          answer = randomInt - randomInt2; // subtract
-          break;
+          return 100;
       case 2:
-          answer = randomInt * randomInt2; // multiply
-          break;
+          return 1000;
+      default:
+          return 9999;
+    }
+  }, [level]);
+
+  const [randomInt, generateRandom] = useState(Math.floor(Math.random() * max));
+  const [randomInt2, generateRandom2] = useState(Math.floor(Math.random() * max));
+  const [operation, generateOperation] = useState(Math.floor(Math.random() * 4));
+
+ 
+  const answer = useMemo(() => { //note to self that useMemo is a hook that recalculates when one of the independent variables change
+   switch (operation) {
+      case 0:
+          return randomInt + randomInt2; // add
+      case 1:
+          return randomInt - randomInt2; // subtract
+      case 2:
+          return randomInt * randomInt2; // multiply
       case 3:
-          answer = randomInt / randomInt2; //divide
-  }
+          return randomInt / randomInt2; //divide
+   }
+  }, [randomInt, randomInt2, operation]);
+ 
 
   const [input, setInput] = useState("");
 
@@ -32,9 +46,10 @@ export default function Zetamac() {
     const value = Number(text);
 
     if (value === answer) {
-       generateRandom(Math.floor(Math.random() * 999));
-       generateRandom2(Math.floor(Math.random() * 999));
-       generateOperation(Math.floor(Math.random()* 3));
+       setScore(score + 1);
+       generateRandom(Math.floor(Math.random() * max));
+       generateRandom2(Math.floor(Math.random() * max));
+       generateOperation(Math.floor(Math.random()* 4));
        setInput("");
 
     }
@@ -48,9 +63,10 @@ export default function Zetamac() {
       <Button
         onPress={() => {
           console.log('You tapped the button!');
-          generateRandom(Math.floor(Math.random() * 999));
-          generateRandom2(Math.floor(Math.random() * 999));
-          generateOperation();
+          generateRandom(Math.floor(Math.random() * max));
+          generateRandom2(Math.floor(Math.random() * max));
+          generateOperation(Math.floor(Math.random() * 4));
+          console.log('this is the operation'+ operation + 'and this is the answer' + answer);
          }}
        title="Press Me"
       />
@@ -60,6 +76,32 @@ export default function Zetamac() {
         
         style={styles.input}
       />
+
+      <Button
+        onPress={() => {
+          console.log('difficulty changed');
+          setDifficulty(0);
+        }}
+        title = "beginner"/>
+      <Button
+        onPress={() => {
+          console.log('difficulty changed to 1');
+          setDifficulty(1);
+        }} 
+        title = "decent"/>
+      <Button
+        onPress={() => {
+          console.log('difficulty changed to 2');
+          setDifficulty(2);
+        }}
+        title = "advanced"/>
+      <Button
+        onPress={() => {
+          console.log('difficulty changed to 3');
+          setDifficulty(3);
+        }}
+        title = "Hell"/>
+
     </View>
   );
 }
