@@ -23,7 +23,13 @@ export default function Zetamac() {
   const [randomInt2, generateRandom2] = useState(Math.floor(Math.random() * max));
   const [operation, generateOperation] = useState(Math.floor(Math.random() * 4));
 
- 
+  const generateProblem = () => {
+       generateRandom(Math.floor(Math.random() * max));
+       generateRandom2(Math.floor(Math.random() * max));
+       generateOperation(Math.floor(Math.random()* 4));
+  };
+
+
   const answer = useMemo(() => { //note to self that useMemo is a hook that recalculates when one of the independent variables change
    switch (operation) {
       case 0:
@@ -47,9 +53,7 @@ export default function Zetamac() {
 
     if (value === answer) {
        setScore(score + 1);
-       generateRandom(Math.floor(Math.random() * max));
-       generateRandom2(Math.floor(Math.random() * max));
-       generateOperation(Math.floor(Math.random()* 4));
+       generateProblem();
        setInput("");
 
     }
@@ -63,9 +67,7 @@ export default function Zetamac() {
       <Button
         onPress={() => {
           console.log('You tapped the button!');
-          generateRandom(Math.floor(Math.random() * max));
-          generateRandom2(Math.floor(Math.random() * max));
-          generateOperation(Math.floor(Math.random() * 4));
+          generateProblem();
           console.log('this is the operation'+ operation + 'and this is the answer' + answer);
          }}
        title="Press Me"
