@@ -61,73 +61,113 @@ export default function Zetamac() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>
-        this is where the zetamac page will be {score} {randomInt} {randomInt2} {answer} {operation}
-      </Text>
-      <Button
-        onPress={() => {
-          console.log('You tapped the button!');
-          generateProblem();
-          console.log('this is the operation'+ operation + 'and this is the answer' + answer);
-         }}
-       title="Press Me"
-      />
-      <TextInput 
+      <Text style={styles.scoreText}>Score: {score}</Text>
+    
+      <View style={styles.problemBox}>
+        <Text style={styles.problemText}>
+          {randomInt} {operation} {randomInt2}
+        </Text>
+      </View>
+    
+      <TextInput
         value={input}
         onChangeText={answerInput}
-        
         style={styles.input}
       />
-
-      <Button
-        onPress={() => {
-          console.log('difficulty changed');
-          setDifficulty(0);
-        }}
-        title = "beginner"/>
-      <Button
-        onPress={() => {
-          console.log('difficulty changed to 1');
-          setDifficulty(1);
-        }} 
-        title = "decent"/>
-      <Button
-        onPress={() => {
-          console.log('difficulty changed to 2');
-          setDifficulty(2);
-        }}
-        title = "advanced"/>
-      <Button
-        onPress={() => {
-          console.log('difficulty changed to 3');
-          setDifficulty(3);
-        }}
-        title = "Hell"/>
-
+    
+      <View style={styles.mainButton}>
+        <Button
+          title="Press Me"
+          onPress={() => {
+            console.log('You tapped the button!');
+            generateProblem();
+            console.log('this is the operation'+ operation + 'and this is the answer' + answer);
+          }}
+        />
+      </View>
+    
+      <View style={styles.difficultyContainer}>
+        <View style={styles.diffButton}>
+          <Button title="Beginner" onPress={() => setDifficulty(0)} />
+        </View>
+        <View style={styles.diffButton}>
+          <Button title="Decent" onPress={() => setDifficulty(1)} />
+        </View>
+        <View style={styles.diffButton}>
+          <Button title="Advanced" onPress={() => setDifficulty(2)} />
+        </View>
+        <View style={styles.diffButton}>
+          <Button title="Hell" onPress={() => setDifficulty(3)} />
+        </View>
+      </View>
     </View>
   );
 }
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    backgroundColor: "#0f172a",
     alignItems: "center",
-    backgroundColor: "#25292e",
+    paddingTop: 60,
+    paddingHorizontal: 24,
   },
 
-  text: {
-    color: "#ffffff",
+  scoreText: {
+    color: "#e5e7eb",
+    fontSize: 18,
+    fontWeight: "500",
+    marginBottom: 20,
+  },
+
+  problemBox: {
+    backgroundColor: "#020617",
+    paddingVertical: 28,
+    paddingHorizontal: 36,
+    borderRadius: 18,
+    marginBottom: 24,
+    minWidth: "80%",
+    alignItems: "center",
+  },
+
+  problemText: {
+    color: "#f8fafc",
+    fontSize: 36,
+    fontWeight: "700",
+    letterSpacing: 1,
   },
 
   input: {
-    height: 40,
-    borderColor: '#cccccc',
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingLeft: 10,
-    backgroundColor: '#ffffff',
-    color: '#000000',
+    width: "80%",
+    height: 52,
+    borderRadius: 14,
+    backgroundColor: "#ffffff",
+    fontSize: 20,
+    textAlign: "center",
+    color: "#000000",
+    marginBottom: 20,
   },
 
+  mainButton: {
+    width: "80%",
+    borderRadius: 14,
+    overflow: "hidden",
+    marginBottom: 30,
+  },
+
+  difficultyContainer: {
+    width: "100%",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    gap: 12,
+  },
+
+  diffButton: {
+    width: "48%",
+    borderRadius: 12,
+    overflow: "hidden",
+  },
 });
+
